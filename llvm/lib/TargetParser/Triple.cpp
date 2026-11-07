@@ -149,6 +149,8 @@ StringRef Triple::getArchTypeName(ArchType Kind) {
     return "thumb";
   case thumbeb:
     return "thumbeb";
+  case customisa:
+    return "customisa";
   case ve:
     return "ve";
   case wasm32:
@@ -670,6 +672,7 @@ Triple::ArchType Triple::parseArch(StringRef ArchName) {
           .Case("renderscript64", Triple::renderscript64)
           .Case("shave", Triple::shave)
           .Case("ve", Triple::ve)
+          .Case("customisa", Triple::customisa)
           .Case("wasm32", Triple::wasm32)
           .Case("wasm64", Triple::wasm64)
           .Case("csky", Triple::csky)

@@ -27,6 +27,21 @@ executionEnvironments = [
   { root = "lldb/packages/Python", pythonVersion = "3.8" },
   { root = "utils/docs", pythonVersion = "3.8" },
 ]
+exclude = [
+  "**/build/**",
+  "clang/**",
+  "clang-tools-extra/**",
+  "compiler-rt/**",
+  "flang/**",
+  "libc/**",
+  "libcxx/**",
+  "libcxxabi/**",
+  "libunwind/**",
+  "lld/**",
+  "lldb/**",
+  "mlir/**",
+  "polly/**"
+]
 
 [dependency-groups]
 dev = [
