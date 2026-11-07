@@ -4504,6 +4504,22 @@ libc_support_library(
 )
 
 libc_support_library(
+    name = "__support_osutil_linux_syscall_wrappers_madvise",
+    hdrs = ["src/__support/OSUtil/linux/syscall_wrappers/madvise.h"],
+    target_compatible_with = select({
+        "@platforms//os:linux": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    deps = [
+        ":__support_common",
+        ":__support_error_or",
+        ":__support_macros_config",
+        ":__support_osutil_syscall",
+        ":types_size_t",
+    ],
+)
+
+libc_support_library(
     name = "__support_osutil_linux_syscall_wrappers_mmap",
     hdrs = ["src/__support/OSUtil/linux/syscall_wrappers/mmap.h"],
     target_compatible_with = select({
@@ -4536,6 +4552,22 @@ libc_support_library(
 )
 
 libc_support_library(
+    name = "__support_osutil_linux_syscall_wrappers_mremap",
+    hdrs = ["src/__support/OSUtil/linux/syscall_wrappers/mremap.h"],
+    target_compatible_with = select({
+        "@platforms//os:linux": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    deps = [
+        ":__support_common",
+        ":__support_error_or",
+        ":__support_macros_config",
+        ":__support_osutil_syscall",
+        ":types_size_t",
+    ],
+)
+
+libc_support_library(
     name = "__support_osutil_linux_syscall_wrappers_munmap",
     hdrs = ["src/__support/OSUtil/linux/syscall_wrappers/munmap.h"],
     target_compatible_with = select({
@@ -4562,6 +4594,38 @@ libc_support_library(
         ":__support_error_or",
         ":__support_macros_config",
         ":__support_osutil_syscall",
+    ],
+)
+
+libc_support_library(
+    name = "__support_osutil_linux_syscall_wrappers_pkey_alloc",
+    hdrs = ["src/__support/OSUtil/linux/syscall_wrappers/pkey_alloc.h"],
+    target_compatible_with = select({
+        "@platforms//os:linux": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    deps = [
+        ":__support_common",
+        ":__support_error_or",
+        ":__support_macros_config",
+        ":__support_osutil_syscall",
+        ":hdr_errno_macros",
+    ],
+)
+
+libc_support_library(
+    name = "__support_osutil_linux_syscall_wrappers_pkey_free",
+    hdrs = ["src/__support/OSUtil/linux/syscall_wrappers/pkey_free.h"],
+    target_compatible_with = select({
+        "@platforms//os:linux": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    deps = [
+        ":__support_common",
+        ":__support_error_or",
+        ":__support_macros_config",
+        ":__support_osutil_syscall",
+        ":hdr_errno_macros",
     ],
 )
 
@@ -12056,6 +12120,24 @@ libc_support_library(
 )
 
 libc_support_library(
+    name = "__support_math_sinbf16",
+    hdrs = ["src/__support/math/sinbf16.h"],
+    deps = [
+        ":__support_fputil_bfloat16",
+        ":__support_fputil_cast",
+        ":__support_fputil_fenv_impl",
+        ":__support_fputil_fp_bits",
+        ":__support_fputil_multiply_add",
+        ":__support_macros_attributes",
+        ":__support_macros_config",
+        ":__support_macros_optimization",
+        ":__support_sincosf_utils",
+        ":hdr_errno_macros",
+        ":hdr_fenv_macros",
+    ],
+)
+
+libc_support_library(
     name = "__support_math_sinf",
     hdrs = [
         "src/__support/math/sinf.h",
@@ -16431,6 +16513,13 @@ libc_math_function(
 )
 
 libc_math_function(
+    name = "sinbf16",
+    additional_deps = [
+        ":__support_math_sinbf16",
+    ],
+)
+
+libc_math_function(
     name = "sinf",
     additional_deps = [":__support_math_sinf"],
 )
@@ -19623,9 +19712,8 @@ libc_function(
         ":__support_common",
         ":__support_libc_errno",
         ":__support_macros_config",
-        ":__support_osutil_syscall",
+        ":__support_osutil_linux_syscall_wrappers_madvise",
         ":errno",
-        ":hdr_sys_mman_macros",
         ":types_size_t",
     ],
 )
@@ -19731,7 +19819,7 @@ libc_function(
         ":__support_common",
         ":__support_libc_errno",
         ":__support_macros_config",
-        ":__support_osutil_syscall",
+        ":__support_osutil_linux_syscall_wrappers_mremap",
         ":errno",
         ":hdr_sys_mman_macros",
         ":types_size_t",
@@ -19818,9 +19906,8 @@ libc_function(
         ":__support_common",
         ":__support_libc_errno",
         ":__support_macros_config",
-        ":__support_osutil_syscall",
+        ":__support_osutil_linux_syscall_wrappers_pkey_alloc",
         ":errno",
-        ":hdr_errno_macros",
     ],
 )
 
@@ -19832,9 +19919,8 @@ libc_function(
         ":__support_common",
         ":__support_libc_errno",
         ":__support_macros_config",
-        ":__support_osutil_syscall",
+        ":__support_osutil_linux_syscall_wrappers_pkey_free",
         ":errno",
-        ":hdr_errno_macros",
     ],
 )
 
